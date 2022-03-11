@@ -1,0 +1,72 @@
+<form (submit)="resolve()" class="w-100 matrix_form bg-filter" [formGroup]="formControl">
+  <h2>Número de estados</h2>
+  <input class="matrix_size" type="number" inputmode="decimal" min="1" max="30" matInput formControlName="size"
+    (change)="setMatrixSize()">
+  <div class="matrix_container">
+    <div class="matrix_row"
+      *ngFor="let row of formControl.controls | keyvalue">
+      <div class="mx-3"
+        *ngFor="let column of getGroup(row.key).controls | keyvalue">
+        <div formGroupName="{{row.key}}">
+          <input class="matrix_number" type="number" inputmode="decimal" min="0" max="1" matInput formControlName="{{column.key}}" placeholder="{{column.key}}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="state_container">
+    <div class="state_child">
+      <h3>Estado Inicial</h3>
+      <input class="matrix_size extra_input" type="number" inputmode="decimal" min="0" max="{{actualSize - 1}}" matInput formControlName="inicialState"
+      (change)="setMatrixSize()">
+    </div>
+    <div class="state_child">
+      <h3>Estado Final</h3>
+      <input class="matrix_size extra_input" type="number" inputmode="decimal" min="0" max="{{actualSize - 1}}" matInput formControlName="finalState"
+      (change)="setMatrixSize()">
+    </div>
+  </div>
+  <div class="perdiod_container">
+    <h3>Número de Periodos</h3>
+    <input class="matrix_size extra_input" type="number" inputmode="decimal" min="1" matInput formControlName="periods"
+    (change)="setMatrixSize()">
+  </div>
+  <input class="matrix_button" type="button" value="Resolver"
+    (click)="resolve()"/>
+</form>
+
+<div class="w-100 matrix_form bg-filter mt-3"
+  *ngIf="finalVectors.length != 0">
+  <h2>
+    Probabilidad solicitada: {{finalVectors[finalVectors.length - 1][getVal('finalState')]}}
+  </h2>
+  <h2>Vectores π<sub>i</sub> :</h2>
+  <h4 *ngFor="let vector of finalVectors; let index = index">
+    Vector π<sub>{{index}}</sub> : ({{printVector(vector)}})
+  </h4>
+  <input class="matrix_button" type="button" value="Mostrar Matrices"
+    (click)="setVal('showMatrix')"
+    [hidden]="getVal('showMatrix')"/>
+  <input class="matrix_button" type="button" value="Ocultar Matrices"
+    (click)="setVal('showMatrix')"
+    [hidden]="!getVal('showMatrix')"/>
+</div>
+
+<table #matrixResults class="w-100 matrix_form bg-filter mt-3"
+  [hidden]="!getVal('showMatrix')">
+  <h2>Matríz de Transición: </h2>
+</table>
+
+
+<swal
+  #swalError
+  title=""
+  html=""
+  icon="info"
+  [focusCancel]="true"
+  [swalOptions]="{
+  confirmButtonText: 'Cerrar',
+  heightAuto: false,
+  iconColor: 'red'
+  }">
+<!--   timer: 2000 -->
+</swal>

@@ -1,0 +1,73 @@
+::ng-deep .px-0 .mat-list-item-content {
+  width: 100%;
+  padding: 0 !important;
+}
+
+.active {
+  // rgba(110, 24, 24, 0.8)
+  // #c48b11;
+  // gold rgba(196, 139, 17, 0.8);
+  // white translucid
+  // background-color: rgba(196, 139, 17, 0.8);
+  background-color: #4d5259;
+  color: white;
+  z-index: 10;
+}
+
+.active::before, .active::after,
+.list-group-item-action:hover::before,
+.list-group-item-action:hover::after {
+  position: absolute;
+  right: 0;
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background: transparent;
+}
+
+.active::before {
+  z-index: 10;
+  top: -50px;
+  box-shadow: 30px 25px 0 3px #4d5259 !important;
+}
+
+.active::after {
+  z-index: 10;
+  box-shadow: 30px -25px 0 3px #4d5259 !important;
+}
+
+.active.list-group-item-action:hover {
+  background-color: #4d5259;
+}
+
+.active.list-group-item-action:focus {
+  background-color: #4d5259;
+}
+
+.list-group-item-action {
+  height: 56px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  transition: box-shadow 1s;
+}
+
+.list-group-item-action:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.list-group-item-action:hover::before {
+  top: -50px;
+  box-shadow: 30px 25px 0 3px rgba(0, 0, 0, 1);
+}
+
+.list-group-item-action:hover::after {
+  box-shadow: 30px -25px 0 3px rgba(0, 0, 0, 1);
+}
+
+.list-group-item-action:focus {
+  background-color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  outline: none;
+}

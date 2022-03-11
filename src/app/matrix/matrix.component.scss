@@ -1,0 +1,114 @@
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .bg-filter {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.extra_input {
+  margin: 0 20px !important;
+  width: 100px !important;
+}
+
+h3 {
+  width: 100%;
+  text-align: center;
+}
+
+.matrix_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .matrix_button {
+    height: 30px;
+    width: 250px;
+    margin: 20px;
+    border: none;
+    border-radius: 5px;
+    transition: box-shadow 0.5s;
+  }
+
+  .matrix_button:hover {
+    box-shadow: 0px 0px 15px 3px rgba(196, 139, 17, 1);
+  }
+
+  .matrix_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    overflow: scroll;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  .matrix_number::-webkit-outer-spin-button,
+  .matrix_number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .matrix_number {
+    margin: 5px 0;
+    border-radius: 5px;
+    border: none;
+    width: 50px;
+    -moz-appearance: textfield;
+  }
+
+  .matrix_row {
+    display: flex;
+    max-width: 100%;
+  }
+}
+
+
+.matrix_size {
+  width: 90%;
+  max-width: 200px;
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+}
+
+
+.state_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .state_child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    margin: 20px 40px;
+  }
+}
+
+.perdiod_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  margin: 20px 40px;
+}
+
+
+@media screen and (max-width: 940px) {
+  .matrix_form {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .state_container {
+    flex-direction: column;
+    align-items: center;
+  }
+}

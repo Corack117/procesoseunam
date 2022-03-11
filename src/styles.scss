@@ -1,1 +1,127 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$component-list : 'matrix','test';
+$prefix : 'app-toolbar';
+
+@each $c in $component-list {
+  #{$prefix}-#{$c}{
+   display: flex;
+   width: 100%;
+  }
+}
+
+.bg-gold {
+  color: #c48b11;
+}
+
+// rgba(196, 139, 17, 0.8);
+.bg-white-traslucid {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bottom-border-0.mat-expansion-panel:not(.mat-expanded), .bottom-border-0.mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.top-border-0.mat-expansion-panel:not(.mat-expanded), .top-border-0.mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+.border-bottom-dashed {
+  border-bottom: 1px dashed;
+}
+
+.color-gold {
+  color: #C48B11;
+}
+
+.color-red-light {
+  color: #C21B28 !important;
+}
+
+.border-gray {
+  border-color: rgba(162, 162, 162, 1)
+}
+
+.h-25px {
+  height: 25px !important;
+}
+
+.h-64px {
+  height: 64px !important;
+}
+
+.min-h-64px {
+  min-height: 64px !important;
+}
+
+.h-42px {
+  height: 42px !important;
+}
+
+.bg-grey-select {
+  .mat-form-field-flex {
+    background-color: rgba(89, 89, 89, 1) !important;
+  }
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ml-3 {
+  margin-left: .75rem !important;
+}
+
+.mr-3 {
+  margin-right: .75rem !important;
+}
+
+.min-w-25 {
+  min-width: 25%;
+}
+
+.mw-75 {
+  max-width: 75%;
+}
+
+.pl-2 {
+  padding-left: .5rem !important;
+}
+
+.pl-3 {
+  padding-left: .75rem !important;
+}
+
+.pl-4 {
+  padding-left: 1rem !important;
+}
+
+.scroll-container {
+  overflow: scroll;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #c48b11 !important;
+}
+
+.swal2-popup .swal2-styled:focus {
+    box-shadow: none !important;
+}
+
+.w-100px {
+  width: 100px !important;
+}
+
+

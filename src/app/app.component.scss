@@ -1,0 +1,53 @@
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .bg-filter {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.bg-red-baktun {
+  background: linear-gradient(to right,#C21B28, #7C2C2C, #661011);
+  // background-color: rgba(110, 24, 24, 0.8);
+}
+
+mat-drawer {
+  background-color: #333333;
+}
+
+mat-drawer-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  // background-color: white;
+  // background-image: url('../assets/xolos/r4.png');
+  background-color: #4d5259;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+}
+
+.sidebar {
+  max-width: 260px;
+  border: none;
+}
+
+@media screen and (max-width: 939px) {
+  .sidebar {
+    max-width: 350px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .page-container {
+    padding: 10px !important;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .sidebar {
+    width: 100%;
+  }
+}
