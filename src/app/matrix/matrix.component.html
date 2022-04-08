@@ -1,3 +1,5 @@
+<h1 class="w-100 text-center" *ngIf="!firstProb">Probabilidad Condicional</h1>
+<h1 class="w-100 text-center" *ngIf="firstProb">Probabilidad Primera Vez</h1>
 <form (submit)="resolve()" class="w-100 matrix_form bg-filter" [formGroup]="formControl">
   <h2>Número de estados</h2>
   <input class="matrix_size" type="number" inputmode="decimal" min="1" max="30" matInput formControlName="size"
@@ -36,13 +38,24 @@
 
 <div class="w-100 matrix_form bg-filter mt-3"
   *ngIf="finalVectors.length != 0">
-  <h2>
+  <h2 *ngIf="!firstProb">
     Probabilidad solicitada: {{finalVectors[finalVectors.length - 1][getVal('finalState')]}}
   </h2>
-  <h2>Vectores π<sub>i</sub> :</h2>
-  <h4 *ngFor="let vector of finalVectors; let index = index">
-    Vector π<sub>{{index}}</sub> : ({{printVector(vector)}})
-  </h4>
+  <h2 *ngIf="firstProb">
+    Probabilidad solicitada: {{firstProbValues[firstProbValues.length - 1]}}
+  </h2>
+  <h2 *ngIf="!firstProb">Vectores π<sub>i</sub> :</h2>
+  <h2 *ngIf="firstProb">P<sub>x</sub>(T<sub>y</sub> = n)</h2>
+  <div *ngIf="!firstProb">
+    <h4 *ngFor="let vector of finalVectors; let index = index">
+      Vector π<sub>{{index}}</sub> : ({{printVector(vector)}})
+    </h4>
+  </div>
+  <div *ngIf="firstProb">
+    <h4 *ngFor="let vector of firstProbValues; let index = index">
+      P<sub>{{getVal('inicialState')}}</sub>(T<sub>{{getVal('finalState')}}</sub> = {{index + 1}}) = {{vector}}
+    </h4>
+  </div>
   <input class="matrix_button" type="button" value="Mostrar Matrices"
     (click)="setVal('showMatrix')"
     [hidden]="getVal('showMatrix')"/>

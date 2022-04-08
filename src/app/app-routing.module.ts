@@ -12,7 +12,16 @@ const routes: Routes = [
     redirectTo: 'matrix'
   },
   {
+    path: 'ini',
+    redirectTo: 'prob-inicial'
+  },
+  {
     path: 'matrix',
+    loadChildren: () => import('./matrix/matrix.module')
+    .then(m => m.MatrixModule)
+  },
+  {
+    path: 'prob-inicial',
     loadChildren: () => import('./matrix/matrix.module')
     .then(m => m.MatrixModule)
   },

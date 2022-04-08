@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
@@ -14,17 +15,23 @@ export class MatrixComponent implements OnInit {
   // private newMatrix: number[][] = [];
   private finalMatrix: number[][] = [];
   private vector: number[] = [];
+  public firstProb!: boolean;
+  public firstProbValues!: number[];
   public formControl!: FormGroup;
   public actualSize: number = 0;
   public finalVectors: number[][] = [];
+  public firstProbVectors: number[][] = [];
 
   @ViewChild('swalError') swalError!: SwalComponent;
   @ViewChild('matrixResults') matrixResults!: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
-    private renderer: Renderer2
-  ) { }
+    private renderer: Renderer2,
+    private router: Router
+  ) {
+    this.firstProb = !this.router.url.includes('matrix') ? true : false;
+  }
 
   ngOnInit(): void {
     this.formControl = this.formBuilder.group({
@@ -232,7 +239,7 @@ export class MatrixComponent implements OnInit {
         td.style.maxWidth = '80px';
         td.style.padding = '10px';
         td.style.textAlign = 'center';
-        td.innerHTML = column.toString();
+        td.innerHTML = column.toFixed(4);
         tr.appendChild(td);
       }
       this.matrixResults.nativeElement.appendChild(tr);
@@ -242,6 +249,7 @@ export class MatrixComponent implements OnInit {
   public resolve = () => {
     const invalidMatrix: any = this.validateMatrix();
     const isValid: boolean = this.showAlert(invalidMatrix);
+    let firstProbVector: number[] = [];
     if (!isValid)
       return;
     const actualMatrix = this.setNewMatrix();
@@ -261,6 +269,9 @@ export class MatrixComponent implements OnInit {
         this.renderer.removeChild(this.matrixResults.nativeElement, child);
     this.printMatrix();
     this.finalVectors.push([...this.vector])
+    firstProbVector = this.finalMatrix[this.getVal('finalState')];
+    if (this.firstProb)
+      this.firstProbVectors.push([...firstProbVector]);
     const periods = this.getVal('periods') - 1;
     for (let period = 0; period < periods; period++) {
       for (let i = 0; i < this.actualSize; i++) {
@@ -281,7 +292,29 @@ export class MatrixComponent implements OnInit {
       }
       this.finalVectors.push([...this.vector])
       this.printMatrix(period+2);
+      firstProbVector = this.finalMatrix[this.getVal('finalState')];
+      if (this.firstProb)
+        this.firstProbVectors.push([...firstProbVector]);
       newMatrix = this.cloneMatrix(this.finalMatrix);
     }
+    if (this.firstProb)
+      this.resolveFirstProb();
+  }
+
+  public resolveFirstProb = () => {
+    const finalState = this.getVal('finalState');
+    const probValues: number[] = [];
+    this.finalVectors.forEach((vector: number[], n: number) => {
+      let value: number = 0;
+      for (let m = 1; n >= m; m++) {
+        // console.log(probValues[m-1], this.firstProbVectors[n-m][finalState])
+        value += probValues[m-1] * this.firstProbVectors[n-m][finalState];
+      }
+      // console.log(vector[finalState])
+      // console.log('----------------------')
+      value = parseFloat((vector[finalState] - value).toFixed(4));
+      probValues.push(value);
+    })
+    this.firstProbValues = probValues;
   }
 }
